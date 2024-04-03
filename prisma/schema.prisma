@@ -13,10 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Store{
-  id String @id @default(uuid()) @map("_id") @db.String
-  name String @db.String
-  userId String @db.String
+model Store {
+  id        String   @id @default(uuid()) @map("_id")
+  name      String
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
