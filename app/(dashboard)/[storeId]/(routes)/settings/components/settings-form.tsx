@@ -14,6 +14,9 @@ import {Input} from "@/components/ui/input";
 import toast from "react-hot-toast";
 import {useParams, useRouter} from "next/navigation";
 import axios from "axios";
+import {AlertModel} from "@/components/modals/alert-model";
+import {ApiAlert} from "@/components/ui/api-alert";
+import {useOrigin} from "@/hooks/use-origin";
 
 interface SettingsFormProps{
     initialData: Store;
@@ -30,6 +33,8 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 }) => {
     const params = useParams()
     const router = useRouter();
+    const origin = useOrigin()
+
     const[open, setOpen] = useState(false)
     const[loading, setLoading] = useState(false)
 
@@ -45,14 +50,32 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
             router.refresh()
             toast.success("Store updated successfully.")
         } catch (error) {
-            toast.error("Error creating settings")
+            toast.error("Error saving stored data.")
         } finally{
             setLoading(false)
         }
     }
 
+    const onDelete = async () => {
+        try {
+            setOpen(true)
+            await axios.delete(`/api/stores/${params.storeId}`)
+            router.refresh()
+            router.push("/")
+            toast.success("Store deleted successfully.")
+        } catch (error){
+            toast.error("Make sure you removed all products and categories first!")
+        } finally {
+            setLoading(false)
+            setOpen(false)
+        }
+    }
+
     return(
         <>
+            <AlertModel isOpen={open}
+                        onClose={() => setOpen(false)}
+                        onConfirm={onDelete} loading={loading}/>
             <div className={"flex flex-items-center justify-between"}>
                 <Heading title={"Settings"}
                          description={"Manage settings"}/>
@@ -86,6 +109,10 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                     </Button>
                 </form>
             </Form>
+            <Separator/>
+            <ApiAlert variant={"public"}
+                      title={"NEXT_PUBLIC_API_URL"}
+                      description={`${origin}/api/${params.storeId}`} />
         </>
     )
 }
