@@ -17,6 +17,7 @@ import axios from "axios";
 import {AlertModel} from "@/components/modals/alert-model";
 import {ApiAlert} from "@/components/ui/api-alert";
 import {useOrigin} from "@/hooks/use-origin";
+import ImageUpload from "@/components/ui/image-upload";
 
 interface BillboardFormProps{
     initialData: Billboard | null;
@@ -86,42 +87,53 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                         onClose={() => setOpen(false)}
                         onConfirm={onDelete} loading={loading}/>
             <div className={"flex flex-items-center justify-between"}>
-                <Heading title={"Settings"}
-                         description={"Manage settings"}/>
-                <Button
-                    disabled={loading}
-                    variant={"destructive"}
-                    size={"sm"}
-                    onClick={() => setOpen(true)}
-                >
-                    <Trash className={"h-4 w-4"}/>
-                </Button>
+                <Heading title={title}
+                         description={description}/>
+
+                    {
+                        initialData && (<Button
+                            disabled={loading}
+                            variant={"destructive"}
+                            size={"sm"}
+                            onClick={() => setOpen(true)}
+                        >
+                            <Trash className={"h-4 w-4"}/>
+                        </Button>)
+                    }
             </div>
             <Separator/>
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-8 w-full"}>
+                    <FormField control={form.control} name={"imageUrl"} render={({field}) => (
+                        <FormItem>
+                            <FormLabel>
+                                Background image
+                            </FormLabel>
+                            <FormControl>
+                                <ImageUpload value={field.value ? [field.value] : []} disabled={loading} onChange={(url) => field.onChange(url)} onRemove={(url) => field.onChange("")}/>
+                            </FormControl>
+                            <FormMessage/>
+                        </FormItem>
+                    )}/>
                     <div className={"grid grid-cols-3 gap-8"}>
-                        <FormField control={form.control} name={"name"} render={({field}) => (
+                        <FormField control={form.control} name={"label"} render={({field}) => (
                             <FormItem>
                                 <FormLabel>
-                                    Name
+                                    Label
                                 </FormLabel>
                                 <FormControl>
-                                    <Input disabled={loading} placeholder={"Store name"} {...field} />
+                                    <Input disabled={loading} placeholder={"Billboard label"} {...field} />
                                 </FormControl>
                                 <FormMessage/>
                             </FormItem>
                         )}/>
                     </div>
                     <Button disabled={loading} className={"ml-auto"} type={"submit"}>
-                        Save changes
+                        {action}
                     </Button>
                 </form>
             </Form>
             <Separator/>
-            <ApiAlert variant={"public"}
-                      title={"NEXT_PUBLIC_API_URL"}
-                      description={`${origin}/api/${params.storeId}`} />
         </>
     )
 }
