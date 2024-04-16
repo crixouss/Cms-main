@@ -14,15 +14,15 @@ import toast from "react-hot-toast";
 import {useParams, useRouter} from "next/navigation";
 import axios from "axios";
 import {AlertModel} from "@/components/modals/alert-model";
-import { SizeColumn } from "./columns";
+import {SizeColumn} from "@/app/(dashboard)/[storeId]/(routes)/sizes/components/columns";
 
 interface CellActionProps {
     data: SizeColumn;
 }
 
 export const CellAction:React.FC<CellActionProps> =({
-    data
-}) => {
+                                                        data
+                                                    }) => {
     const router = useRouter()
     const params = useParams()
     const onCopy = (id: string) => {
@@ -39,9 +39,9 @@ export const CellAction:React.FC<CellActionProps> =({
             await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
             router.push("/")
             router.refresh();
-            toast.success("Size deleted.")
+            toast.success("Billboard deleted.")
         } catch (error){
-            toast.error("Make sure you removed all products using this size first.")
+            toast.error("Make sure you removed all categories using this billboard.")
         } finally {
             setLoading(false)
             setOpen(false)

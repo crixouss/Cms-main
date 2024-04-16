@@ -14,10 +14,10 @@ import toast from "react-hot-toast";
 import {useParams, useRouter} from "next/navigation";
 import axios from "axios";
 import {AlertModel} from "@/components/modals/alert-model";
-import {BillboardColumn} from "@/app/(dashboard)/[storeId]/(routes)/billboards/components/columns";
+import {ColorColumn} from "@/app/(dashboard)/[storeId]/(routes)/colors/components/columns";
 
 interface CellActionProps {
-    data: BillboardColumn;
+    data: ColorColumn;
 }
 
 export const CellAction:React.FC<CellActionProps> =({
@@ -27,7 +27,7 @@ export const CellAction:React.FC<CellActionProps> =({
     const params = useParams()
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Billboard id copied to clipboard.");
+        toast.success("Color id copied to clipboard.");
     }
 
     const [loading, setLoading] = useState(false)
@@ -36,12 +36,12 @@ export const CellAction:React.FC<CellActionProps> =({
     const onDelete = async () => {
         try {
             setOpen(true)
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+            await axios.delete(`/api/${params.storeId}/colors/${data.id}`)
             router.push("/")
             router.refresh();
-            toast.success("Billboard deleted.")
+            toast.success("Color deleted.")
         } catch (error){
-            toast.error("Make sure you removed all categories using this billboard.")
+            toast.error("Make sure you removed all products using this color first.")
         } finally {
             setLoading(false)
             setOpen(false)
@@ -66,7 +66,7 @@ export const CellAction:React.FC<CellActionProps> =({
                         <Copy className={"mr-2 h-4 w-4"}/>
                         Copy
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}>
                         <Edit className={"mr-2 h-4 w-4"}/>
                         Update
                     </DropdownMenuItem>
