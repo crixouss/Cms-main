@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import {useParams, useRouter} from "next/navigation";
 import axios from "axios";
 import {AlertModel} from "@/components/modals/alert-model";
-import {SizeColumn} from "@/app/(dashboard)/[storeId]/(routes)/sizes/components/columns";
+import { SizeColumn } from "./columns";
 
 interface CellActionProps {
     data: SizeColumn;
@@ -39,9 +39,9 @@ export const CellAction:React.FC<CellActionProps> =({
             await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
             router.push("/")
             router.refresh();
-            toast.success("Billboard deleted.")
+            toast.success("Size deleted.")
         } catch (error){
-            toast.error("Make sure you removed all categories using this billboard.")
+            toast.error("Make sure you removed all products using this size first.")
         } finally {
             setLoading(false)
             setOpen(false)
