@@ -51,7 +51,7 @@ export async function POST(req: Request) {
                 }
             },
             data: {
-                isArchived: true
+                isArchived: false
             }
         })
     }
