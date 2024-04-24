@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import {Bar, BarChart, ResponsiveContainer,  XAxis, YAxis} from "recharts";
+import {Bar, BarChart, /* LineChart, */ ResponsiveContainer, XAxis, YAxis} from "recharts";
 
 interface OverviewProps {
     data: any[];
@@ -10,7 +10,7 @@ interface OverviewProps {
 export const Overview: React.FC<OverviewProps> = ({data
 }) => {
     return (
-        <ResponsiveContainer width="99%" height={300}>
+        <ResponsiveContainer width="100%" height={300}>
             <BarChart  data={data}>
                 <XAxis dataKey="name"
                        stroke={"#888888"}
