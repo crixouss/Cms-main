@@ -1,5 +1,4 @@
 import React from "react";
-import prismadb from "@/lib/prismadb";
 import {Heading} from "@/components/ui/heading";
 import {Separator} from "@/components/ui/separator";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
@@ -25,7 +24,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
               <Heading title={"Dashboard"} description={"Overview of your store"} />
               <Separator/>
               <div className={"grid grid-4 grid-cols-3"}>
-                  <Card>
+                  <Card className={"p-4"}>
                       <CardHeader className={"flex flex-row items-center justify-between space-y-0 pb-2"}>
                           <CardTitle className={"text-sm font-medium"}>
                               Total Revenue
@@ -38,7 +37,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
                           </div>
                       </CardContent>
                   </Card>
-                  <Card>
+                  <Card className={"p-4"}>
                       <CardHeader className={"flex flex-row items-center justify-between space-y-0 pb-2"}>
                           <CardTitle className={"text-sm font-medium"}>
                               Sales
@@ -51,7 +50,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
                           </div>
                       </CardContent>
                   </Card>
-                  <Card>
+                  <Card className={"p-4"}>
                       <CardHeader className={"flex flex-row items-center justify-between space-y-0 pb-2"}>
                           <CardTitle className={"text-sm font-medium"}>
                               Products in Stock
