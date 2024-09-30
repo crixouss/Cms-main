@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import { auth } from "@clerk/nextjs";
+import {auth} from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
 export async function POST(
@@ -97,6 +97,7 @@ export async function GET(
         const colorId = searchParams.get("colorId") || undefined;
         const sizeId = searchParams.get("sizeId") || undefined;
         const isFeattured = searchParams.get("isFeattured");
+        const isCommingSoon = searchParams.get("isCommingSoon");
 
 
         if(!params.storeId){
@@ -112,7 +113,7 @@ export async function GET(
                 sizeId,
                 isFeattured: isFeattured ? true : undefined,
                 isArchived: false,
-                isCommingSoon: false,
+                isCommingSoon: isCommingSoon ? true : undefined,
             },
             include: {
                 images: true,
