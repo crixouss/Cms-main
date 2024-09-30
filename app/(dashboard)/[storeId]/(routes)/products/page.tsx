@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import { format } from "date-fns"
+import {format} from "date-fns"
 import {formatter} from "@/lib/utils";
 import {ProductColumn} from "@/app/(dashboard)/[storeId]/(routes)/products/components/columns";
 import {ProductClient} from "@/app/(dashboard)/[storeId]/(routes)/products/components/client";
