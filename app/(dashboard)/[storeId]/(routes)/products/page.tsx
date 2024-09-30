@@ -26,6 +26,7 @@ const ProductsPage = async ({params
         name: item.name,
         isFeattured: item.isFeattured,
         isArchived: item.isArchived,
+        isCommingSoon: item.isCommingSoon,
         price: formatter.format(item.price.toNumber()),
         category: item.category.name,
         size: item.size.name,
