@@ -85,23 +85,24 @@ model Color {
 // npx prisma generate
 // npx prisma db push
 model Product {
-  id          String      @id @default(uuid())
-  storeId     String
-  store       Store       @relation("StoreToProducts", fields: [storeId], references: [id])
-  categoryId  String
-  category    Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
-  name        String
-  price       Decimal
-  isFeattured Boolean     @default(false)
-  isArchived  Boolean     @default(false)
-  sizeId      String
-  size        Size        @relation(fields: [sizeId], references: [id])
-  colorId     String
-  color       Color       @relation(fields: [colorId], references: [id])
-  images      Image[]
-  orderItems  OrderItem[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id            String      @id @default(uuid())
+  storeId       String
+  store         Store       @relation("StoreToProducts", fields: [storeId], references: [id])
+  categoryId    String
+  category      Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  name          String
+  price         Decimal
+  isCommingSoon Boolean     @default(false)
+  isFeattured   Boolean     @default(false)
+  isArchived    Boolean     @default(false)
+  sizeId        String
+  size          Size        @relation(fields: [sizeId], references: [id])
+  colorId       String
+  color         Color       @relation(fields: [colorId], references: [id])
+  images        Image[]
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   @@index([storeId])
   @@index([categoryId])
