@@ -11,7 +11,17 @@ export async function POST(
     try {
         const { userId } = auth();
         const body = await req.json()
-        const { name, price, categoryId,colorId, sizeId, images, isCommingSoon, isFeattured, isArchived} = body;
+        const {
+            name,
+            price,
+            categoryId,
+            colorId,
+            sizeId,
+            images,
+            isCommingSoon,
+            isFeattured,
+            isArchived
+        } = body;
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 })
