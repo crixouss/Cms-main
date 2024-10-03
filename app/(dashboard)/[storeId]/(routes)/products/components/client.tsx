@@ -2,7 +2,7 @@
 
 import {Heading} from "@/components/ui/heading";
 import {Button} from "@/components/ui/button";
-import {Database, Plus} from "lucide-react";
+import {Plus} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import {useParams, useRouter} from "next/navigation";
 import React from "react";
